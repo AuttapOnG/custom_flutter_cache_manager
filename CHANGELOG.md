@@ -1,7 +1,7 @@
 ## [3.1.1] - 2021-06-03
 * Move File to separate file. You can add it using the following import:
 ```dart
-import 'package:flutter_cache_manager/file.dart' as cache_file;
+import 'package:custom_flutter_cache_manager/file.dart' as cache_file;
 ```
 
 ## [3.1.0] - 2021-05-28

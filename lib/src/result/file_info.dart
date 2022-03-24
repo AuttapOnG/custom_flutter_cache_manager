@@ -1,11 +1,12 @@
-import 'package:file/file.dart';
 import 'package:custom_flutter_cache_manager/src/result/file_response.dart';
+import 'package:file/file.dart';
 
 ///Flutter Cache Manager
 ///Copyright (c) 2019 Rene Floor
 ///Released under MIT License.
 
 /// Enum for whether the file is coming from the cache or is just downloaded.
+// ignore: constant_identifier_names
 enum FileSource { NA, Cache, Online }
 
 /// FileInfo contains the fetch File next to some info on the validity and

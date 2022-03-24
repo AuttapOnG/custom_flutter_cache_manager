@@ -1,11 +1,8 @@
 import 'dart:async';
 
-import 'package:custom_flutter_cache_manager/src/config/config.dart';
 import 'package:custom_flutter_cache_manager/src/storage/file_system/file_system.dart';
-import 'package:pedantic/pedantic.dart';
 
-import 'result/file_info.dart';
-import 'storage/cache_info_repositories/cache_info_repository.dart';
+import '../flutter_cache_manager.dart';
 import 'storage/cache_object.dart';
 
 ///Flutter Cache Manager
@@ -41,6 +38,9 @@ class CacheStore {
       return null;
     }
     final file = await fileSystem.createFile(cacheObject.relativePath);
+    cacheLogger.log(
+        'CacheManager: Loaded $key from cache', CacheManagerLogLevel.verbose);
+
     return FileInfo(
       file,
       FileSource.Cache,
@@ -81,7 +81,7 @@ class CacheStore {
           _memCache[key] = cacheObject;
         }
         completer.complete(cacheObject);
-        unawaited(_futureCache.remove(key));
+        _futureCache.remove(key);
       }));
       _futureCache[key] = completer.future;
     }
@@ -165,7 +165,7 @@ class CacheStore {
   Future<void> removeCachedFile(CacheObject cacheObject) async {
     final provider = await _cacheInfoRepository;
     final toRemove = <int>[];
-    unawaited(_removeCachedFile(cacheObject, toRemove));
+    await _removeCachedFile(cacheObject, toRemove);
     await provider.deleteAll(toRemove);
   }
 
@@ -178,11 +178,11 @@ class CacheStore {
       _memCache.remove(cacheObject.key);
     }
     if (_futureCache.containsKey(cacheObject.key)) {
-      unawaited(_futureCache.remove(cacheObject.key));
+      _futureCache.remove(cacheObject.key);
     }
     final file = await fileSystem.createFile(cacheObject.relativePath);
     if (await file.exists()) {
-      unawaited(file.delete());
+      await file.delete();
     }
   }
 

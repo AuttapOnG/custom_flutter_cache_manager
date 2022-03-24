@@ -1,9 +1,10 @@
 import 'dart:io';
 
 import 'package:custom_flutter_cache_manager/src/storage/cache_info_repositories/helper_methods.dart';
-import 'package:path/path.dart';
 import 'package:custom_path_provider/path_provider.dart';
+import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
+
 import '../cache_object.dart';
 import 'cache_info_repository.dart';
 

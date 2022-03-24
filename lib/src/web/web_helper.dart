@@ -3,16 +3,11 @@ import 'dart:collection';
 import 'dart:io';
 
 import 'package:clock/clock.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:custom_flutter_cache_manager/flutter_cache_manager.dart';
-import 'package:custom_flutter_cache_manager/src/result/file_response.dart';
-import 'package:custom_flutter_cache_manager/src/storage/cache_object.dart';
 import 'package:custom_flutter_cache_manager/src/cache_store.dart';
-import 'package:custom_flutter_cache_manager/src/web/file_service.dart';
-import 'package:custom_flutter_cache_manager/src/result/file_info.dart';
+import 'package:custom_flutter_cache_manager/src/storage/cache_object.dart';
 import 'package:custom_flutter_cache_manager/src/web/queue_item.dart';
-import 'package:pedantic/pedantic.dart';
+import 'package:flutter/foundation.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:uuid/uuid.dart';
 
@@ -60,6 +55,8 @@ class WebHelper {
       _queue.add(QueueItem(url, key, authHeaders));
       return;
     }
+    cacheLogger.log(
+        'CacheManager: Downloading $url', CacheManagerLogLevel.verbose);
 
     concurrentCalls++;
     var subject = _memCache[key]!;

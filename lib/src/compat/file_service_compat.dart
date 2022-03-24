@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:clock/clock.dart';
-import 'package:custom_flutter_cache_manager/src/compat/file_fetcher.dart';
 
 import '../../flutter_cache_manager.dart';
 import '../web/mime_converter.dart';
@@ -37,7 +36,7 @@ class CompatFileServiceGetResponse implements FileServiceResponse {
   @override
   DateTime get validTill {
     // Without a cache-control header we keep the file for a week
-    var ageDuration = const Duration(days: 7);
+    var ageDuration = const Duration(hours: 1);
     final cacheControl = _header(HttpHeaders.cacheControlHeader);
     if (cacheControl != null) {
       final controlSettings = cacheControl.split(',');

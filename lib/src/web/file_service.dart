@@ -84,7 +84,7 @@ class HttpGetResponse implements FileServiceResponse {
   @override
   DateTime get validTill {
     // Without a cache-control header we keep the file for a week
-    var ageDuration = const Duration(days: 7);
+    var ageDuration = const Duration(hours: 1);
     final controlHeader = _header(HttpHeaders.cacheControlHeader);
     if (controlHeader != null) {
       final controlSettings = controlHeader.split(',');
